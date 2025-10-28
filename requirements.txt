@@ -1,4 +1,4 @@
-pip install keyboard
+pip install keyboard // py -m pip install keyboard    
 python -m venv .venv
 source .venv/Scripts/activate
 pip install "fastapi[standard]"
